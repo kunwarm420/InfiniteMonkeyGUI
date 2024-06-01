@@ -13,4 +13,6 @@ module com.example.infinitemonkeygui {
 
     opens com.example.infinitemonkeygui to javafx.fxml;
     exports com.example.infinitemonkeygui;
+    exports com.example.infinitemonkeygui.controllers;
+    opens com.example.infinitemonkeygui.controllers to javafx.fxml;
 }
