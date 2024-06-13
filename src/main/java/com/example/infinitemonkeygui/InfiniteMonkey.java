@@ -1,6 +1,5 @@
 package com.example.infinitemonkeygui;
 
-import com.example.infinitemonkeygui.controllers.HelloApplication;
 import javafx.application.Application;
 
 import javafx.fxml.FXMLLoader;
@@ -16,6 +15,7 @@ public class InfiniteMonkey extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/Scene1.fxml"));
         stage.setScene(new Scene(root));
         stage.setTitle("FXML Scene Switching Example");
+        stage.setResizable(false);
         stage.show();
 
         SceneManager.setPrimaryStage(stage);

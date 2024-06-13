@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.infinitemonkeygui.controllers.AppController">
+
+   <children>
+      <Button layoutX="441.0" layoutY="326.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="139.0" text="Stop" />
+      <Label layoutX="14.0" layoutY="27.0" prefHeight="33.0" prefWidth="202.0" text="What the Monkey's typing:" wrapText="true">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField layoutX="14.0" layoutY="67.0" prefHeight="152.0" prefWidth="573.0" />
+      <Label layoutX="14.0" layoutY="287.0" prefHeight="76.0" prefWidth="325.0" text="Label" />
+      <Label layoutX="14.0" layoutY="262.0" prefHeight="33.0" prefWidth="101.0" text="Closest Phrase: " />
+      <Label layoutX="14.0" layoutY="237.0" prefHeight="25.0" prefWidth="81.0" text="Your Phrase: " />
+      <Label layoutX="101.0" layoutY="241.0" prefHeight="17.0" prefWidth="125.0" text="Phrase" />
+   </children>
+
+</AnchorPane>
