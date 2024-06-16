@@ -7,18 +7,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class InfiniteMonkey extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/Scene1.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/menu.fxml")));
         stage.setScene(new Scene(root));
         stage.setTitle("FXML Scene Switching Example");
         stage.setResizable(false);
         stage.show();
 
-        SceneManager.setPrimaryStage(stage);
+//        SceneManager.setPrimaryStage(stage);
 
 
     }

@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
@@ -9,21 +7,22 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.infinitemonkeygui.controllers.MenuController">
 
    <children>
-      <Button layoutX="226.0" layoutY="302.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="149.0" text="Start Guessing!" />
-      <Label layoutX="234.0" layoutY="226.0" prefHeight="17.0" prefWidth="132.0" text="How Many Typewriter?" />
-      <TextField layoutX="223.0" layoutY="250.0" prefHeight="27.0" prefWidth="155.0" promptText="Lets get monkeys to work" />
-      <TextField alignment="TOP_LEFT" layoutX="141.0" layoutY="88.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="114.0" prefWidth="319.0" promptText="Enter whatever word you want to search for...">
-         <effect>
-            <Blend />
-         </effect>
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor></TextField>
+
+
       <Label layoutX="167.0" layoutY="38.0" prefHeight="50.0" prefWidth="267.0" text="Type the text you want to look for: ">
-         <font>
-            <Font name="Berlin Sans FB Demi Bold" size="17.0" />
-         </font>
+         <font><Font name="Berlin Sans FB Demi Bold" size="17.0" /></font>
       </Label>
+
+      <TextField fx:id="textToSearch" alignment="TOP_LEFT" layoutX="141.0" layoutY="88.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="114.0"
+                 prefWidth="319.0" promptText="Enter whatever word you want to search for...">
+         <effect><Blend /></effect>
+         <cursor><Cursor fx:constant="DEFAULT" /></cursor>
+      </TextField>
+
+      <Label layoutX="234.0" layoutY="226.0" prefHeight="17.0" prefWidth="132.0" text="How Many Typewriter?" fx:id="dataLabel"/>
+      <TextField fx:id="monkeysAmount" layoutX="223.0" layoutY="250.0" prefHeight="27.0" prefWidth="155.0" promptText="Lets get monkeys to work" />
+
+      <Button onAction="#switchToApp" layoutX="226.0" layoutY="302.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="149.0" text="Start Guessing!" />
    </children>
 
 </AnchorPane>
