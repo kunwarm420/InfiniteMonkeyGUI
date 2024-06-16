@@ -1,26 +1,29 @@
 package com.example.infinitemonkeygui.controllers;
 
+import com.example.infinitemonkeygui.typeWriterMonkeys.GlobalVariables;
 import com.example.infinitemonkeygui.typeWriterMonkeys.Monkey;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 public class AppController {
 
-    private int monkeyAmount;
-    private String textToSearch;
-
     @FXML
     Label textLabel;
+
+    @FXML
+    TextField randomTextField;
 
     Monkey monkey;
 
     @FXML
     public void initData(int monkeyAmount, String textToSearch){
-        this.monkeyAmount=monkeyAmount;
-        this.textToSearch=textToSearch;
+        GlobalVariables.typeWriterAmount=monkeyAmount;
+        GlobalVariables.textToSearch=textToSearch;
+
         textLabel.setText(textToSearch);
-        System.out.println(monkeyAmount+ textToSearch);
-        monkey= new Monkey();
+        System.out.println(monkeyAmount + " " +  textToSearch);
+        monkey = new Monkey();
     }
 
 

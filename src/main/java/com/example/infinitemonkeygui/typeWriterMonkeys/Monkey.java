@@ -1,17 +1,32 @@
 package com.example.infinitemonkeygui.typeWriterMonkeys;
 
-public class Monkey {
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Random;
 
-    private final RandomIntegerGenerator randomIntegerGenerator;
+public class Monkey implements Runnable{
+
+    private final int charIndex = 0;
+    private final Random random= new Random();
+    public  static LinkedList<Character> buffer;
+
 
     public Monkey() {
-        randomIntegerGenerator= new RandomIntegerGenerator();
-        Thread monkeyThread = new Thread(randomIntegerGenerator);
+        buffer = new LinkedList<>();
+
+        Thread monkeyThread = new Thread(this);
         monkeyThread.setName("monkeyThread");
         monkeyThread.start();
-
     }
 
-
+    @Override
+    public void run() {
+        while (true) {
+            int randomNumber = random.nextInt(1, 58);
+            Character character= charMap.get(randomNumber);
+            System.out.println(character);
+        }
+    }
 
 }

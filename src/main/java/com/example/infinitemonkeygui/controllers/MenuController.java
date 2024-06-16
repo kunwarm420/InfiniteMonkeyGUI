@@ -21,15 +21,6 @@ public class MenuController {
     private TextField textToSearch, monkeysAmount;
 
 
-    public void initData(String data) {
-        dataLabel.setText(data);
-    }
-
-
-    /**
-     *
-     * @param event
-     */
     @FXML
     private void switchToApp(ActionEvent event) {
         // Logic to switch to Scene 2
@@ -50,15 +41,13 @@ public class MenuController {
 
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     *
-     * @return
-     */
+
     public String isValidText() {
         String text = textToSearch.getText();
         // Regex to match uppercase and lowercase letters, spaces, commas, exclamation marks, question marks, colons, and semicolons
@@ -69,10 +58,6 @@ public class MenuController {
     }
 
 
-    /**
-     *
-     * @return
-     */
     public String isValidInteger(){
         String text=monkeysAmount.getText();
         if (text.isEmpty() || !text.matches("\\d+")) {
@@ -82,7 +67,9 @@ public class MenuController {
     }
 
 
-
+    public void initData(String data) {
+        dataLabel.setText(data);
+    }
 
 
 }

@@ -2,28 +2,19 @@ package com.example.infinitemonkeygui.typeWriterMonkeys;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
-public class RandomIntegerGenerator implements Runnable {
+public class GlobalVariables {
 
-    private final Random random;
+    public static int typeWriterAmount;
+    public static String textToSearch;
+
     public static Map<Integer, Character> charMap;
 
-    public RandomIntegerGenerator(){
-        random= new Random();
+    static{
         initHashMap();
     }
 
-    @Override
-    public void run() {
-        while (true) {
-            int randomNumber = random.nextInt(1, 58);
-            Character character= charMap.get(randomNumber);
-        }
-    }
-
-
-    private void initHashMap() {
+    private static void initHashMap() {
         charMap= new HashMap<>();
 
         // Map uppercase letters
