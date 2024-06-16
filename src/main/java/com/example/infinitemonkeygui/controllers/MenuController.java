@@ -53,7 +53,6 @@ public class MenuController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -62,11 +61,13 @@ public class MenuController {
      */
     public String isValidText() {
         String text = textToSearch.getText();
-        if (text.isEmpty() || !text.matches("[a-zA-Z\\s.,!?;:'\"()\\-]+")) {
+        // Regex to match uppercase and lowercase letters, spaces, commas, exclamation marks, question marks, colons, and semicolons
+        if (text.isEmpty() || !text.matches("[a-zA-Z\\s,!?;.:]+")) {
             return null;
         }
         return text;
     }
+
 
     /**
      *

@@ -1,5 +1,6 @@
 package com.example.infinitemonkeygui.controllers;
 
+import com.example.infinitemonkeygui.typeWriterMonkeys.Monkey;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -11,20 +12,16 @@ public class AppController {
     @FXML
     Label textLabel;
 
-
+    Monkey monkey;
 
     @FXML
     public void initData(int monkeyAmount, String textToSearch){
         this.monkeyAmount=monkeyAmount;
         this.textToSearch=textToSearch;
-        System.out.println(monkeyAmount+ textToSearch);
         textLabel.setText(textToSearch);
-
-
+        System.out.println(monkeyAmount+ textToSearch);
+        monkey= new Monkey();
     }
-
-
-
 
 
 
