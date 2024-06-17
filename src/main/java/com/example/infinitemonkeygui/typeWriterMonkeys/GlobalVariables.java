@@ -9,6 +9,7 @@ public class GlobalVariables {
     public static String textToSearch;
     public static int sleepTime= 10;
     public static Map<Integer, Character> charMap;
+    public static String[] closestPhrase = new String[typeWriterAmount];
 
     static{
         initHashMap();

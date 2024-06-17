@@ -13,11 +13,15 @@ public class Monkey implements Runnable{
     private final int stringSize=GlobalVariables.textToSearch.length();
 
     public static LinkedList<Character> buffer;
-    private final TextArea outputTextArea;
+    private final TextArea outputTextArea, closestString;
 
-    public Monkey(TextArea outputTextField) {
+    private String closestMatch;
+
+    public Monkey(TextArea outputTextField, TextArea closestString) {
         buffer = new LinkedList<>();
         this.outputTextArea = outputTextField;
+        this.closestString = closestString;
+        closestMatch="";
 
         Thread monkeyThread = new Thread(this);
         monkeyThread.setName("monkeyThread");
@@ -49,9 +53,12 @@ public class Monkey implements Runnable{
 
 
     public void matchString(Character myChar) throws StringFoundException {
-//      System.out.println("Checking: " + GlobalVariables.textToSearch.charAt(charIndex) +  myChar);
+
         if(GlobalVariables.textToSearch.charAt(charIndex)==myChar){
+            System.out.println("Matched: " + GlobalVariables.textToSearch.charAt(charIndex) + " " + myChar);
             charIndex++;
+            checkClosestMatch();
+
             if(charIndex==stringSize){
                 System.out.println("Matched");
                 throw new StringFoundException("String Found");
@@ -60,6 +67,19 @@ public class Monkey implements Runnable{
             charIndex=0;
         }
     }
+
+    public void checkClosestMatch(){
+
+        System.out.println("hello"  + closestMatch.length() + charIndex);
+        if (charIndex > closestMatch.length()){
+            closestMatch= GlobalVariables.textToSearch.substring(0, charIndex);
+
+            Platform.runLater(() -> {
+                closestString.setText(closestMatch);
+            });
+        }
+    }
+
 
     /**
      * Sleep to simulate typing delay

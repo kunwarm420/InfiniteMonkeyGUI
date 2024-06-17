@@ -24,7 +24,7 @@ public class AppController {
         closestString.setEditable(false);
 
         System.out.println(monkeyAmount + " " +  textToSearch);
-        monkey = new Monkey(randomTextArea);
+        monkey = new Monkey(randomTextArea, closestString);
     }
 
 }
