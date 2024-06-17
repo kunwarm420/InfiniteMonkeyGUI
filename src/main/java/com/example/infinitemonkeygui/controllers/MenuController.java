@@ -7,8 +7,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 
@@ -18,7 +20,10 @@ public class MenuController {
     private Label dataLabel;
 
     @FXML
-    private TextField textToSearch, monkeysAmount;
+    private TextField monkeysAmount;
+
+    @FXML
+    TextArea textToSearch;
 
 
     @FXML

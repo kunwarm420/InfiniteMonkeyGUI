@@ -7,7 +7,7 @@ public class GlobalVariables {
 
     public static int typeWriterAmount;
     public static String textToSearch;
-
+    public static int sleepTime= 10;
     public static Map<Integer, Character> charMap;
 
     static{

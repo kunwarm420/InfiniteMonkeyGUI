@@ -4,15 +4,13 @@ import com.example.infinitemonkeygui.typeWriterMonkeys.GlobalVariables;
 import com.example.infinitemonkeygui.typeWriterMonkeys.Monkey;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class AppController {
 
     @FXML
-    Label textLabel;
-
-    @FXML
-    TextField randomTextField;
+    TextArea randomTextArea, userString, closestString;
 
     Monkey monkey;
 
@@ -21,11 +19,12 @@ public class AppController {
         GlobalVariables.typeWriterAmount=monkeyAmount;
         GlobalVariables.textToSearch=textToSearch;
 
-        textLabel.setText(textToSearch);
+        userString.setText(textToSearch);
+        userString.setEditable(false);
+        closestString.setEditable(false);
+
         System.out.println(monkeyAmount + " " +  textToSearch);
-        monkey = new Monkey();
+        monkey = new Monkey(randomTextArea);
     }
-
-
 
 }
