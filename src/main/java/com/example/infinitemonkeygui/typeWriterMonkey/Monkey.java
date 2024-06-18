@@ -2,6 +2,7 @@ package com.example.infinitemonkeygui.typeWriterMonkey;
 
 import com.example.infinitemonkeygui.controllers.PopUpController;
 import javafx.application.Platform;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -18,16 +19,18 @@ public class Monkey implements Runnable{
 
     private final TextField charCountArea;
     private final TextArea outputTextArea, closestString;
+    private final Button toggleButton;
     private String closestMatch ="";
 
     Thread monkeyThread;
     private boolean paused = false;
     private final Object lock = new Object();
 
-    public Monkey(TextArea outputTextArea, TextArea closestString, TextField charCountArea) {
+    public Monkey(TextArea outputTextArea, TextArea closestString, TextField charCountArea, Button toggleButton) {
         this.outputTextArea = outputTextArea;
         this.closestString = closestString;
         this.charCountArea= charCountArea;
+        this.toggleButton=toggleButton;
 
         matchFound= false;
 
@@ -57,6 +60,7 @@ public class Monkey implements Runnable{
             updateCharCount();
             if(matchFound){
                 GlobalVariables.resetMonkey=true;
+                updateButtonInterface();
                 return;
             }
             sleepThread();
@@ -127,7 +131,7 @@ public class Monkey implements Runnable{
     }
 
     /**
-     *
+     *Updates cloestMatch Ui to show the current closest Match
      */
     private void updateClosestMatchInterface(){
         Platform.runLater(() -> {
@@ -136,13 +140,22 @@ public class Monkey implements Runnable{
     }
 
     /**
-     * Updates charCountArea UI
+     * Updates charCountArea UI to show the current charCount
      */
     private void updateCharCountInterface(){
        Platform.runLater(() -> {
            charCountArea.setText(String.valueOf(charCount));
        });
    }
+
+    /**
+     * Updates button Ui to show "reset"
+     */
+    private void updateButtonInterface(){
+        Platform.runLater(() -> {
+            toggleButton.setText("Reset");
+        });
+    }
 
     /**
      * Guesses a random number, converts that into character using hashMap
@@ -154,7 +167,7 @@ public class Monkey implements Runnable{
     }
 
     /**
-     * Sleep to simulate typing delay
+     * Sleeps to simulate typing delay
      */
     private void sleepThread(){
         try {
@@ -164,15 +177,22 @@ public class Monkey implements Runnable{
         }
     }
 
+    /**
+     * Pauses thread to stop monkey Thread
+     */
     public void pauseMonkey() {
         paused = true;
     }
 
+    /**
+     * Continues the monkey Thread
+     */
     public void resumeMonkey() {
         synchronized (lock) {
             paused = false;
             lock.notify();
         }
     }
+
 
 }

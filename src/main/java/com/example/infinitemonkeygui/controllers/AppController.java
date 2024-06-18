@@ -41,7 +41,7 @@ public class AppController {
         closestString.setEditable(false);
 
         System.out.println(textToSearch);
-        monkey = new Monkey(randomTextArea, closestString, charCountArea);
+        monkey = new Monkey(randomTextArea, closestString, charCountArea, pauseButton);
     }
 
     @FXML
