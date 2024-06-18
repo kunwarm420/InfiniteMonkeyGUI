@@ -1,8 +1,8 @@
 package com.example.infinitemonkeygui.controllers;
 
-import javafx.scene.control.Alert;
 
-import java.io.IOException;
+import javafx.scene.control.Alert;
+import javafx.application.Platform;
 
 public class PopUpController {
 
@@ -22,12 +22,12 @@ public class PopUpController {
         return alert;
     }
 
-    public static void stringMatchShowAlert() throws IOException {
-        stringMatched.showAndWait();
+    public static void stringMatchFoundShowAlert() {
+        Platform.runLater(stringMatched::showAndWait);
     }
 
     public static void wrongInputShowAlert(){
-        wrongInput.showAndWait();
+        Platform.runLater(wrongInput::showAndWait);
     }
 
 }

@@ -3,12 +3,17 @@ package com.example.infinitemonkeygui.typeWriterMonkey;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Initialises hashMap
+ * Holds global variables
+ */
 public class GlobalVariables {
 
+
     public static String textToSearch;
-    public static int sleepTime= 1;
+    public final static int sleepTime= 1;
     public static Map<Integer, Character> charMap;
-    public static int maxTextLength=500;
+    public final static int maxTextLength=500;
 
     static{
         initHashMap();

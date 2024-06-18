@@ -17,16 +17,12 @@ public class MenuController {
 
     @FXML
     private void switchToApp(ActionEvent event) {
-        // Logic to switch to Scene 2
-        // SceneManager.setScene("/menu.fxml");
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/app.fxml"));
             Parent root = loader.load();
-
             AppController appController = loader.getController();
 
             String userText=isValidText();
-
             if(userText==null){
                 return;
             }

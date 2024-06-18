@@ -1,13 +1,13 @@
 package com.example.infinitemonkeygui.typeWriterMonkey;
 
-import com.example.infinitemonkeygui.controllers.PopUpController;
+import java.util.Random;
+import java.io.IOException;
+
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.Random;
+import com.example.infinitemonkeygui.controllers.PopUpController;
 
 public class Monkey implements Runnable{
 
@@ -17,112 +17,135 @@ public class Monkey implements Runnable{
     private final Random random= new Random();
     private final int stringSize=GlobalVariables.textToSearch.length();
 
-    public static LinkedList<Character> buffer;
-    private final TextArea outputTextArea, closestString;
     private final TextField charCountArea;
+    private final TextArea outputTextArea, closestString;
+    private String closestMatch ="";
 
-    private String closestMatch;
-
-    public Monkey(TextArea outputTextField, TextArea closestString, TextField charCountArea) {
-        buffer = new LinkedList<>();
-        this.outputTextArea = outputTextField;
+    public Monkey(TextArea outputTextArea, TextArea closestString, TextField charCountArea) {
+        this.outputTextArea = outputTextArea;
         this.closestString = closestString;
         this.charCountArea= charCountArea;
-
-        closestMatch="";
 
         Thread monkeyThread = new Thread(this);
         monkeyThread.setName("monkeyThread");
         monkeyThread.start();
-        System.out.println("String Size: " + stringSize);
     }
 
     @Override
     public void run() {
         while (true) {
-            int randomNumber = random.nextInt(1, 58);
-            Character character= GlobalVariables.charMap.get(randomNumber);
-
-            // Update the TextField on the JavaFX Application Thread
-            Platform.runLater(() -> {
-                outputTextArea.appendText(character.toString());
-            });
-
+            //Guess random char and add it to the textArea
+            Character randomCharacter=guessRandomCharacter();
+            updateOutputTextAreaInterface(randomCharacter);
             try {
-                matchString(character);
-            } catch (StringFoundException e) {
-               return;
+                doesCharMatch(randomCharacter);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-
-            //Update Count
-
             updateCharCount();
             sleepThread();
         }
     }
 
 
+
+    private void doesCharMatch(char randomCharacter) throws IOException {
+        char charToMatch=GlobalVariables.textToSearch.charAt(charIndex);
+        if(charToMatch==randomCharacter){
+            charIndex++;
+            checkClosestMatch();
+            isStringFound();
+        }
+        else{
+            //reset charIndex to 0
+            charIndex=0;
+        }
+    }
+
+    private void isStringFound() {
+        if(charIndex==stringSize){
+            PopUpController.stringMatchFoundShowAlert();
+        }
+    }
+
+
+    public void checkClosestMatch(){
+        if (charIndex > closestMatch.length()){
+            closestMatch= GlobalVariables.textToSearch.substring(0, charIndex);
+            updateClosestMatchInterface();
+        }
+    }
+
+    /**
+     * Updates the charCount to show how many characters
+     * the program has gone through
+     * Updates the charCount UI
+     * resets the textArea if the count is too high
+     */
     private void updateCharCount(){
         charCount++;
         charCountAreaCount++;
+        updateCharCountInterface();
+        resetTextAreaInterface();
+    }
 
-        Platform.runLater(() -> {
-            charCountArea.setText(String.valueOf(charCount));
-        });
-
+    /**
+     *
+     */
+    private void resetTextAreaInterface(){
         if(charCountAreaCount >= GlobalVariables.maxTextLength){
             Platform.runLater(() -> {
                 outputTextArea.setText("");
             });
             charCountAreaCount=0;
         }
-
     }
 
-
-    public void matchString(Character myChar) throws StringFoundException {
-
-        if(GlobalVariables.textToSearch.charAt(charIndex)==myChar){
-            System.out.println("Matched: " + GlobalVariables.textToSearch.charAt(charIndex) + " " + myChar);
-            charIndex++;
-            checkClosestMatch();
-
-            if(charIndex==stringSize){
-                try {
-                    PopUpController.stringMatchShowAlert();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                System.out.println("Matched");
-                throw new StringFoundException("String Found");
-            }
-        }else{
-            charIndex=0;
-        }
+    /**
+     *
+     * @param newChar
+     */
+    private void updateOutputTextAreaInterface(Character newChar){
+        Platform.runLater(() -> {
+            outputTextArea.appendText(String.valueOf(newChar));
+        });
     }
 
-    public void checkClosestMatch(){
-
-        System.out.println("hello"  + closestMatch.length() + charIndex);
-        if (charIndex > closestMatch.length()){
-            closestMatch= GlobalVariables.textToSearch.substring(0, charIndex);
-            Platform.runLater(() -> {
-                closestString.setText(closestMatch);
-            });
-        }
+    /**
+     *
+     */
+    private void updateClosestMatchInterface(){
+        Platform.runLater(() -> {
+            closestString.setText(closestMatch);
+        });
     }
 
+    /**
+     * Updates charCountArea UI
+     */
+    private void updateCharCountInterface(){
+       Platform.runLater(() -> {
+           charCountArea.setText(String.valueOf(charCount));
+       });
+   }
+
+    /**
+     * Guesses a random number, converts that into character using hashMap
+     * @return random Char Character
+     */
+    private Character guessRandomCharacter(){
+        int randomNumber = random.nextInt(1, 58);
+        return GlobalVariables.charMap.get(randomNumber);
+    }
 
     /**
      * Sleep to simulate typing delay
      */
-    public void sleepThread(){
+    private void sleepThread(){
         try {
             Thread.sleep(GlobalVariables.sleepTime);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
-
-
 }
