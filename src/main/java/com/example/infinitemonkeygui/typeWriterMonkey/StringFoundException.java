@@ -1,4 +1,4 @@
-package com.example.infinitemonkeygui.typeWriterMonkeys;
+package com.example.infinitemonkeygui.typeWriterMonkey;
 
 public class StringFoundException extends Exception{
 

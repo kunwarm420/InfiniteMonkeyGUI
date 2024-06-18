@@ -1,15 +1,13 @@
-package com.example.infinitemonkeygui.typeWriterMonkeys;
+package com.example.infinitemonkeygui.typeWriterMonkey;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class GlobalVariables {
 
-    public static int typeWriterAmount;
     public static String textToSearch;
     public static int sleepTime= 10;
     public static Map<Integer, Character> charMap;
-    public static String[] closestPhrase = new String[typeWriterAmount];
 
     static{
         initHashMap();

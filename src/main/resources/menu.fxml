@@ -4,19 +4,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.infinitemonkeygui.controllers.MenuController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.infinitemonkeygui.controllers.MenuController">
 
     <children>
       <Label layoutX="167.0" layoutY="38.0" prefHeight="50.0" prefWidth="267.0" text="Type the text you want to look for: ">
          <font><Font name="Berlin Sans FB Demi Bold" size="17.0" /></font>
       </Label>
 
-      <TextArea fx:id="textToSearch" layoutX="119.0" layoutY="88.0" prefHeight="127.0" prefWidth="364.0" wrapText="true" />
-
-      <Label fx:id="dataLabel" layoutX="234.0" layoutY="240.0" prefHeight="17.0" prefWidth="132.0" text="How Many Typewriter?" />
-      <TextField fx:id="monkeysAmount" layoutX="223.0" layoutY="257.0" prefHeight="27.0" prefWidth="155.0" promptText="Lets get monkeys to work" />
-
-      <Button layoutX="223.0" layoutY="300.0" mnemonicParsing="false" onAction="#switchToApp" prefHeight="50.0" prefWidth="155.0" text="Start Guessing!" />
+      <TextArea fx:id="textToSearch" layoutX="44.0" layoutY="88.0" prefHeight="200.0" prefWidth="513.0" wrapText="true" />
+        
+      <Button layoutX="223.0" layoutY="306.0" mnemonicParsing="false" onAction="#switchToApp" prefHeight="50.0" prefWidth="155.0" text="Start Guessing!" />
     </children>
 
 </AnchorPane>

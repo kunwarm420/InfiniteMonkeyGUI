@@ -1,0 +1,7 @@
+.textToSearch{
+    -fx-background-image: url("oldMonkey.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}
+

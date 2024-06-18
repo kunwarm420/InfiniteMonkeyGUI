@@ -1,4 +1,4 @@
-package com.example.infinitemonkeygui.typeWriterMonkeys;
+package com.example.infinitemonkeygui.typeWriterMonkey;
 
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;
