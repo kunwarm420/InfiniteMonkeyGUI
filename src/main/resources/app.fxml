@@ -4,23 +4,27 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="413.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.infinitemonkeygui.controllers.AppController"
-            stylesheets="@styles.css">
+<AnchorPane prefHeight="413.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.infinitemonkeygui.controllers.AppController">
 
 
    <children>
-      <Label layoutX="14.0" layoutY="27.0" prefHeight="33.0" prefWidth="202.0" text="What the Monkey's typing:" wrapText="true">
+      <Label layoutX="15.0" layoutY="14.0" prefHeight="33.0" prefWidth="281.0" text="What the Monkey's typing:" wrapText="true">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextArea fx:id="randomTextArea" layoutX="15.0" layoutY="60.0" prefHeight="176.0" prefWidth="573.0" wrapText="true" />
-      <Label layoutX="15.0" layoutY="255.0" prefHeight="25.0" prefWidth="81.0" text="Your Phrase: " />
-      <TextArea fx:id="userString" layoutX="95.0" layoutY="248.0" prefHeight="13.0" prefWidth="492.0" wrapText="true" />
-      <Label layoutX="15.0" layoutY="296.0" prefHeight="25.0" prefWidth="97.0" text="Closest Phrase: " />
-      <TextArea fx:id="closestString" layoutX="14.0" layoutY="321.0" prefHeight="71.0" prefWidth="416.0" wrapText="true" />
-      <Button layoutX="443.0" layoutY="321.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="145.0" text="Stop" />
+      <TextArea fx:id="randomTextArea" layoutX="14.0" layoutY="47.0" prefHeight="176.0" prefWidth="573.0" wrapText="true" />
+      <Label layoutX="15.0" layoutY="223.0" prefHeight="33.0" prefWidth="81.0" text="Your Phrase: " />
+      <TextArea fx:id="userString" layoutX="15.0" layoutY="256.0" prefHeight="51.0" prefWidth="416.0" wrapText="true" />
+      <Label layoutX="440.0" layoutY="231.0" prefHeight="25.0" prefWidth="145.0" text="Characters Typed Count" />
+      <TextField fx:id="charCountArea" alignment="CENTER" disable="true" layoutX="440.0" layoutY="256.0" prefHeight="51.0" prefWidth="145.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="14.0" layoutY="307.0" prefHeight="25.0" prefWidth="97.0" text="Closest Phrase: " />
+      <TextArea fx:id="closestString" layoutX="14.0" layoutY="339.0" prefHeight="60.0" prefWidth="416.0" wrapText="true" />
+      <Button layoutX="442.0" layoutY="339.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" text="Stop" />
    </children>
 
 </AnchorPane>

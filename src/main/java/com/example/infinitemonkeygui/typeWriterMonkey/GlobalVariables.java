@@ -6,8 +6,9 @@ import java.util.Map;
 public class GlobalVariables {
 
     public static String textToSearch;
-    public static int sleepTime= 10;
+    public static int sleepTime= 1;
     public static Map<Integer, Character> charMap;
+    public static int maxTextLength=500;
 
     static{
         initHashMap();

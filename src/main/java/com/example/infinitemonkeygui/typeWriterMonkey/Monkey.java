@@ -1,26 +1,34 @@
 package com.example.infinitemonkeygui.typeWriterMonkey;
 
+import com.example.infinitemonkeygui.controllers.PopUpController;
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Random;
 
 public class Monkey implements Runnable{
 
     private int charIndex = 0;
+    private int charCount =0;
+    private int charCountAreaCount=0;
     private final Random random= new Random();
     private final int stringSize=GlobalVariables.textToSearch.length();
 
     public static LinkedList<Character> buffer;
     private final TextArea outputTextArea, closestString;
+    private final TextField charCountArea;
 
     private String closestMatch;
 
-    public Monkey(TextArea outputTextField, TextArea closestString) {
+    public Monkey(TextArea outputTextField, TextArea closestString, TextField charCountArea) {
         buffer = new LinkedList<>();
         this.outputTextArea = outputTextField;
         this.closestString = closestString;
+        this.charCountArea= charCountArea;
+
         closestMatch="";
 
         Thread monkeyThread = new Thread(this);
@@ -46,10 +54,30 @@ public class Monkey implements Runnable{
                return;
             }
 
+            //Update Count
+
+            updateCharCount();
             sleepThread();
         }
     }
 
+
+    private void updateCharCount(){
+        charCount++;
+        charCountAreaCount++;
+
+        Platform.runLater(() -> {
+            charCountArea.setText(String.valueOf(charCount));
+        });
+
+        if(charCountAreaCount >= GlobalVariables.maxTextLength){
+            Platform.runLater(() -> {
+                outputTextArea.setText("");
+            });
+            charCountAreaCount=0;
+        }
+
+    }
 
 
     public void matchString(Character myChar) throws StringFoundException {
@@ -60,6 +88,11 @@ public class Monkey implements Runnable{
             checkClosestMatch();
 
             if(charIndex==stringSize){
+                try {
+                    PopUpController.stringMatchShowAlert();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 System.out.println("Matched");
                 throw new StringFoundException("String Found");
             }
@@ -73,7 +106,6 @@ public class Monkey implements Runnable{
         System.out.println("hello"  + closestMatch.length() + charIndex);
         if (charIndex > closestMatch.length()){
             closestMatch= GlobalVariables.textToSearch.substring(0, charIndex);
-
             Platform.runLater(() -> {
                 closestString.setText(closestMatch);
             });

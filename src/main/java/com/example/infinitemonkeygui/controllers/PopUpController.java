@@ -1,15 +1,13 @@
 package com.example.infinitemonkeygui.controllers;
 
 import javafx.scene.control.Alert;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class PopUpController {
 
-    private static Alert stringMatched;
-    private static Alert wrongInput;
-    private static final Stage popUpStage = new Stage();
+    private static final Alert stringMatched;
+    private static final Alert wrongInput;
 
     static{
         stringMatched = createAlert("String Found", "Your String has been found!");
