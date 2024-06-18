@@ -21,10 +21,14 @@ public class Monkey implements Runnable{
     private final TextArea outputTextArea, closestString;
     private String closestMatch ="";
 
+    private boolean matchFound;
+
     public Monkey(TextArea outputTextArea, TextArea closestString, TextField charCountArea) {
         this.outputTextArea = outputTextArea;
         this.closestString = closestString;
         this.charCountArea= charCountArea;
+
+        matchFound= false;
 
         Thread monkeyThread = new Thread(this);
         monkeyThread.setName("monkeyThread");
@@ -37,19 +41,14 @@ public class Monkey implements Runnable{
             //Guess random char and add it to the textArea
             Character randomCharacter=guessRandomCharacter();
             updateOutputTextAreaInterface(randomCharacter);
-            try {
-                doesCharMatch(randomCharacter);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            doesCharMatch(randomCharacter);
             updateCharCount();
+            if(matchFound){return;}
             sleepThread();
         }
     }
 
-
-
-    private void doesCharMatch(char randomCharacter) throws IOException {
+    private void doesCharMatch(char randomCharacter) {
         char charToMatch=GlobalVariables.textToSearch.charAt(charIndex);
         if(charToMatch==randomCharacter){
             charIndex++;
@@ -64,6 +63,7 @@ public class Monkey implements Runnable{
 
     private void isStringFound() {
         if(charIndex==stringSize){
+            matchFound= true;
             PopUpController.stringMatchFoundShowAlert();
         }
     }
