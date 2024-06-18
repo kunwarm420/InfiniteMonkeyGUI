@@ -24,7 +24,9 @@
       </TextField>
       <Label layoutX="14.0" layoutY="307.0" prefHeight="25.0" prefWidth="97.0" text="Closest Phrase: " />
       <TextArea fx:id="closestString" layoutX="14.0" layoutY="339.0" prefHeight="60.0" prefWidth="416.0" wrapText="true" />
-      <Button layoutX="442.0" layoutY="339.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" text="Stop" />
+
+      <Button fx:id="pauseButton" onAction="#togglePauseResume" layoutX="442.0" layoutY="339.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" text="Pause" />
+
    </children>
 
 </AnchorPane>

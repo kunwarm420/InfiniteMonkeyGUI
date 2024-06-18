@@ -14,6 +14,7 @@ public class GlobalVariables {
     public final static int sleepTime= 1;
     public static Map<Integer, Character> charMap;
     public final static int maxTextLength=500;
+    public static boolean resetMonkey=false;
 
     static{
         initHashMap();

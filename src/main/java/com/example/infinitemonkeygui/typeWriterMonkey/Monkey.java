@@ -1,16 +1,15 @@
 package com.example.infinitemonkeygui.typeWriterMonkey;
 
-import java.util.Random;
-import java.io.IOException;
-
+import com.example.infinitemonkeygui.controllers.PopUpController;
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-import com.example.infinitemonkeygui.controllers.PopUpController;
+import java.util.Random;
 
 public class Monkey implements Runnable{
 
+    private boolean matchFound;
     private int charIndex = 0;
     private int charCount =0;
     private int charCountAreaCount=0;
@@ -21,7 +20,9 @@ public class Monkey implements Runnable{
     private final TextArea outputTextArea, closestString;
     private String closestMatch ="";
 
-    private boolean matchFound;
+    Thread monkeyThread;
+    private boolean paused = false;
+    private final Object lock = new Object();
 
     public Monkey(TextArea outputTextArea, TextArea closestString, TextField charCountArea) {
         this.outputTextArea = outputTextArea;
@@ -30,7 +31,7 @@ public class Monkey implements Runnable{
 
         matchFound= false;
 
-        Thread monkeyThread = new Thread(this);
+        monkeyThread = new Thread(this);
         monkeyThread.setName("monkeyThread");
         monkeyThread.start();
     }
@@ -38,12 +39,26 @@ public class Monkey implements Runnable{
     @Override
     public void run() {
         while (true) {
+
+            synchronized (lock) {
+                while (paused) {
+                    try {
+                        lock.wait(); // Wait until notified to resume
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
             //Guess random char and add it to the textArea
             Character randomCharacter=guessRandomCharacter();
             updateOutputTextAreaInterface(randomCharacter);
             doesCharMatch(randomCharacter);
             updateCharCount();
-            if(matchFound){return;}
+            if(matchFound){
+                GlobalVariables.resetMonkey=true;
+                return;
+            }
             sleepThread();
         }
     }
@@ -148,4 +163,16 @@ public class Monkey implements Runnable{
             e.printStackTrace();
         }
     }
+
+    public void pauseMonkey() {
+        paused = true;
+    }
+
+    public void resumeMonkey() {
+        synchronized (lock) {
+            paused = false;
+            lock.notify();
+        }
+    }
+
 }

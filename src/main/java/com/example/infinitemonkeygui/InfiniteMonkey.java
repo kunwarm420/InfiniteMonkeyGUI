@@ -16,7 +16,6 @@ public class InfiniteMonkey extends Application {
 
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/menu.fxml")));
         stage.setScene(new Scene(root));
-//        scene.getStylesheets().add("styles.css");
         stage.setTitle("Infinite Monkeys");
         stage.setResizable(false);
         stage.show();
