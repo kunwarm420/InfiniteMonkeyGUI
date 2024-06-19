@@ -8,20 +8,53 @@ import javafx.scene.control.TextField;
 
 import java.util.Random;
 
+/**
+ * Backend aka the monkey typing and the displaying
+ * of the data in the screen
+ */
 public class Monkey implements Runnable{
 
     private boolean matchFound;
     private int charIndex = 0;
     private int charCount =0;
+
+    /**
+     * How many chars are currently displayed on outputArea
+     * to manage when to clear due to memory issue as textarea uses heapMemory
+     */
     private int charCountAreaCount=0;
+
+    /**
+     * To get random int which is converted into
+     * chars letters by mapping int against hashMap
+     */
     private final Random random= new Random();
+
+    /**
+     * Size of the text To Search for.
+     * Ensures it doesnt need to be checked everytime
+     */
     private final int stringSize=GlobalVariables.textToSearch.length();
 
+    /**
+     * User Interfaces
+     */
     private final TextField charCountArea;
+
+    /**
+     * User Interfaces
+     */
     private final TextArea outputTextArea, closestString;
+
+    /**
+     * User Interfaces
+     */
     private final Button toggleButton;
     private String closestMatch ="";
 
+    /**
+     * Thread used to run operations of this class
+     */
     Thread monkeyThread;
     private boolean paused = false;
     private final Object lock = new Object();
@@ -67,6 +100,12 @@ public class Monkey implements Runnable{
         }
     }
 
+    /**
+     * Checks if the given {@code randomCharacter} matches the
+     * expected character from the {@code GlobalVariables.textToSearch}.
+     *
+     * @param randomCharacter new character found
+     */
     private void doesCharMatch(char randomCharacter) {
         char charToMatch=GlobalVariables.textToSearch.charAt(charIndex);
         if(charToMatch==randomCharacter){
@@ -80,6 +119,10 @@ public class Monkey implements Runnable{
         }
     }
 
+    /**
+     * When a Char is matched, this is called
+     * to check if we have found the complete string
+     */
     private void isStringFound() {
         if(charIndex==stringSize){
             matchFound= true;
@@ -88,10 +131,18 @@ public class Monkey implements Runnable{
     }
 
 
+    /**
+     * When matching char is found
+     * checks if this is the longest matching char
+     * if true, makes this the new longest matching string
+     * and updates the user interface in the application
+     */
     public void checkClosestMatch(){
         if (charIndex > closestMatch.length()){
             closestMatch= GlobalVariables.textToSearch.substring(0, charIndex);
-            updateClosestMatchInterface();
+            Platform.runLater(() -> {
+                closestString.setText(closestMatch);
+            });
         }
     }
 
@@ -104,12 +155,21 @@ public class Monkey implements Runnable{
     private void updateCharCount(){
         charCount++;
         charCountAreaCount++;
-        updateCharCountInterface();
+
+        //Updates the userInterface charCountArea
+        Platform.runLater(() -> {
+            charCountArea.setText(String.valueOf(charCount));
+        });
+
+
         resetTextAreaInterface();
     }
 
     /**
-     *
+     * Checks if the total Char amount in the textArea
+     * is higher than allowed.
+     * If true, textArea is reset
+     * and @param charCountAreaCount is set to 0.
      */
     private void resetTextAreaInterface(){
         if(charCountAreaCount >= GlobalVariables.maxTextLength){
@@ -121,8 +181,8 @@ public class Monkey implements Runnable{
     }
 
     /**
-     *
-     * @param newChar
+     * Updates the outputTextArea UI by adding the new char to it
+     * @param newChar char given by random
      */
     private void updateOutputTextAreaInterface(Character newChar){
         Platform.runLater(() -> {
@@ -130,23 +190,10 @@ public class Monkey implements Runnable{
         });
     }
 
-    /**
-     *Updates cloestMatch Ui to show the current closest Match
-     */
-    private void updateClosestMatchInterface(){
-        Platform.runLater(() -> {
-            closestString.setText(closestMatch);
-        });
-    }
 
     /**
      * Updates charCountArea UI to show the current charCount
      */
-    private void updateCharCountInterface(){
-       Platform.runLater(() -> {
-           charCountArea.setText(String.valueOf(charCount));
-       });
-   }
 
     /**
      * Updates button Ui to show "reset"

@@ -1,51 +1,32 @@
-//package com.example.infinitemonkeygui.controllers;
-//
-//
-//import javafx.scene.control.Alert;
-//import javafx.application.Platform;
-//
-//public class PopUpController {
-//
-//    private static final Alert stringMatched;
-//    private static final Alert wrongInput;
-//
-//    static{
-//        stringMatched = createAlert("String Found", "Your String has been found!");
-//        wrongInput = createAlert("Wrong Input Type", "Check the input field");
-//    }
-//
-//    private static Alert createAlert(String alertTitle, String context) {
-//        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//        alert.setTitle(alertTitle);
-//        alert.setHeaderText(null);
-//        alert.setContentText(context);
-//        return alert;
-//    }
-//
-//    public static void stringMatchFoundShowAlert() {
-//        Platform.runLater(stringMatched::showAndWait);
-//    }
-//
-//    public static void wrongInputShowAlert(){
-//        Platform.runLater(wrongInput::showAndWait);
-//    }
-//
-//}
-
 package com.example.infinitemonkeygui.controllers;
 
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 
+/**
+ * Creates static popUp controllers which can be
+ * called from anywhere using the public methods
+ */
 public class PopUpController {
 
+    /**
+     * Creates a popUp for stringMatched
+     */
     private static Alert stringMatched;
+
+    
+    /**
+     * Creates a popUp for stringMatched
+     */
     private static Alert wrongInput;
 
     static {
         createAlerts();
     }
 
+    /**
+     * Initialises the Alerts
+     */
     private static void createAlerts() {
         Platform.runLater(() -> {
             stringMatched = new Alert(Alert.AlertType.INFORMATION);
@@ -60,10 +41,17 @@ public class PopUpController {
         });
     }
 
+    /**
+     * Shows the stringMatched popUp to screen
+     */
     public static void stringMatchFoundShowAlert() {
         Platform.runLater(() -> stringMatched.showAndWait());
     }
 
+
+    /**
+     * Shows the wrongInput popUp to screen 
+     */
     public static void wrongInputShowAlert() {
         Platform.runLater(() -> wrongInput.showAndWait());
     }

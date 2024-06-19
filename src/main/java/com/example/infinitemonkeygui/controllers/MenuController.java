@@ -15,6 +15,10 @@ public class MenuController {
     @FXML
     TextArea textToSearch;
 
+    /**
+     * Switches to the app scene {app.fxml}
+     * @param event users clicks on submit button of MenuController
+     */
     @FXML
     private void switchToApp(ActionEvent event) {
         try {
@@ -37,6 +41,11 @@ public class MenuController {
     }
 
 
+    /**
+     * Checks if the user input is valid
+     * @return null if invalid text, else user string 
+     * @throws IOException
+     */
     public String isValidText() throws IOException {
         String text = textToSearch.getText();
         // Regex to match uppercase and lowercase letters, spaces, commas, exclamation marks, question marks, colons, and semicolons

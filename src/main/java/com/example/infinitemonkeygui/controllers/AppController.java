@@ -8,14 +8,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.EventObject;
-import java.util.Objects;
 
 public class AppController {
 
@@ -32,6 +29,10 @@ public class AppController {
 
     private boolean paused = false;
 
+    /**
+     * Initializes the global Variables 
+     * @param textToSearch
+     */
     @FXML
     public void initData(String textToSearch){
         GlobalVariables.textToSearch=textToSearch;
@@ -44,6 +45,11 @@ public class AppController {
         monkey = new Monkey(randomTextArea, closestString, charCountArea, pauseButton);
     }
 
+    /**
+     * Toggles button to allow for pause and resume monkey typing
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void togglePauseResume(ActionEvent event) throws IOException {
 
@@ -62,6 +68,12 @@ public class AppController {
         paused = !paused;
     }
 
+    /**
+     * Resets the monkey to the beginning of the text area
+     * when user given text is found
+     * @param event
+     * @throws IOException
+     */
     public void swapToBeginning(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/menu.fxml"));
         Parent root = loader.load();
